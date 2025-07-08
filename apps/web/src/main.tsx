@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import {
-  getContext,
+  getQueryClient,
   Provider,
 } from './integrations/tanstack-query/root-provider.tsx';
 
@@ -17,7 +17,7 @@ import reportWebVitals from './reportWebVitals.ts';
 const router = createRouter({
   routeTree,
   context: {
-    ...getContext(),
+    queryClient: getQueryClient(),
   },
   defaultPreload: 'intent',
   scrollRestoration: true,

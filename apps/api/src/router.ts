@@ -1,9 +1,9 @@
-import { initTRPC } from '@trpc/server';
+import { roomsRouter } from './modules/rooms/routes/index.ts';
+import { publicProcedure, router } from './trpc.ts';
 
-export const t = initTRPC.create();
-export const appRouter = t.router({
-  ping: t.procedure.query(() => {
-    return { pong: true };
-  }),
+export const appRouter = router({
+  ping: publicProcedure.query(() => ({ pong: true })),
+  rooms: roomsRouter,
 });
+
 export type AppRouter = typeof appRouter;

@@ -16,7 +16,7 @@ import { type AppRouter, appRouter } from './router.ts';
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: 'http://localhost:5173',
+  origin: 'http://localhost:3000',
 });
 
 app.setSerializerCompiler(serializerCompiler);
