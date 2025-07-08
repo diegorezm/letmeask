@@ -10,7 +10,6 @@ import {
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod';
 import { env } from './env.ts';
-import { getRoomsRoute } from './modules/rooms/routes/get-rooms.ts';
 import { type AppRouter, appRouter } from './router.ts';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -37,7 +36,6 @@ app.register(fastifyTRPCPlugin, {
 app.get('/ping', () => {
   return 'pong';
 });
-app.register(getRoomsRoute);
 
 app.listen({ port: env.PORT }).then(() => {
   // biome-ignore lint/suspicious/noConsole: <only in dev>

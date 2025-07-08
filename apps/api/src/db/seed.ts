@@ -1,19 +1,23 @@
-import { reset, seed } from "drizzle-seed"
-import { db } from "./connection.ts"
-import { schema } from "./schemas/index.ts"
-import { exit } from "node:process"
+import { exit } from 'node:process';
+import { reset, seed } from 'drizzle-seed';
+import { db } from './connection.ts';
+import { schema } from './schemas/index.ts';
 
-await reset(db, schema)
+await reset(db, schema);
 
-await seed(db, schema).refine(f => ({
+await seed(db, schema).refine((f) => ({
   rooms: {
     count: 20,
     columns: {
       name: f.companyName(),
-      description: f.loremIpsum()
-    }
-  }
-}))
+      description: f.loremIpsum(),
+    },
+  },
+  questions: {
+    count: 20,
+  },
+}));
 
-console.log("Database seeded!")
-exit(0)
+// biome-ignore lint/suspicious/noConsole: <no need for this rule>
+console.log('Database seeded!');
+exit(0);

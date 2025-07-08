@@ -1,5 +1,7 @@
-import { roomsTable } from "./room.ts";
+import { questionsTable } from './questions.ts';
+import { roomsTable } from './room.ts';
 
 export const schema = {
-  rooms: roomsTable
-}
+  rooms: roomsTable,
+  questions: questionsTable,
+};

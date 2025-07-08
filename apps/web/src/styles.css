@@ -128,6 +128,14 @@ code {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
