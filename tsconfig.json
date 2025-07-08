@@ -5,6 +5,7 @@
       "ESNext"
     ],
     "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
