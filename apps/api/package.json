@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
+    "@trpc/server": "^11.4.3",
     "drizzle-orm": "^0.44.2",
     "eslint-plugin-drizzle": "^0.2.3",
     "fastify": "^5.4.0",
