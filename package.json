@@ -1,0 +1,17 @@
+{
+  "name": "@letmeask",
+  "version": "1.0.0",
+  "description": "Ask any question!",
+  "license": "MIT",
+  "scripts": {
+   "dev": "pnpm run -r --parallel --aggregate-output dev",
+    "build": "pnpm run -r build",
+    "test": "pnpm run -r --parallel test",
+    "lint": "pnpm run -r --parallel lint",
+    "deploy": "pnpm build && pnpm run -r deploy"
+  },
+  "keywords": ["AI", "Agents"],
+  "author": "https://github.com/diegorezm",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4"
+}
