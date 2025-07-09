@@ -3,7 +3,6 @@ import { Link } from '@tanstack/react-router';
 import { formatDistanceToNow } from 'date-fns';
 import { ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -20,8 +19,8 @@ export function RecentRooms({ rooms }: Props) {
   return (
     <Card className="max-w-lg">
       <CardHeader>
-        <CardTitle>Recent rooms</CardTitle>
-        <CardDescription>Quick access to your latest rooms!</CardDescription>
+        <CardTitle>Salas recentes</CardTitle>
+        <CardDescription>Acesso rápido a suas salas recentes!</CardDescription>
       </CardHeader>
       <CardContent>
         <ul className="space-y-2">
@@ -34,17 +33,17 @@ export function RecentRooms({ rooms }: Props) {
 
                     <div className="space-x-2">
                       <Badge className="text-xs" variant="secondary">
-                        {formatDistanceToNow(new Date(r.createdAt))} ago
+                        há {formatDistanceToNow(new Date(r.createdAt))}
                       </Badge>
                       <Badge className="text-xs" variant="secondary">
-                        {r.questionCount} Question(s)
+                        {r.questionCount} Pergunta(s)
                       </Badge>
                     </div>
                   </div>
-                  <Button variant="ghost">
-                    <span className="text-md ">Enter</span>
+                  <div className="inline-flex items-center justify-center gap-1">
+                    <span className="text-md ">Entrar</span>
                     <ChevronRight className="size-4" />
-                  </Button>
+                  </div>
                 </div>
               </Link>
             </li>

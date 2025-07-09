@@ -13,6 +13,9 @@ await seed(db, schema).refine((f) => ({
       description: f.loremIpsum(),
     },
   },
+  audioChunks: {
+    count: 0,
+  },
   questions: {
     count: 20,
   },

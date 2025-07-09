@@ -8,6 +8,11 @@ import { RecentRooms } from '@/components/recent-rooms';
 export const Route = createLazyFileRoute('/rooms/')({
   component: RouteComponent,
   pendingComponent: () => <Loader />,
+  errorComponent: (e) => (
+    <div className="mx-auto flex min-h-full max-w-4xl items-center justify-center text-destructive text-lg">
+      {e.error.message}
+    </div>
+  ),
 });
 
 function RouteComponent() {

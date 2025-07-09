@@ -8,3 +8,5 @@ export type RoomsFindByIdOutput = RouterOutputs["rooms"]["findById"];
 
 export type QuestionsFindByRoomIdOutput =
 	RouterOutputs["questions"]["findByRoomId"];
+
+export type QuestionsFindByIdOutput = RouterOutputs["questions"]["findById"];

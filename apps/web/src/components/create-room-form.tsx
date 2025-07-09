@@ -60,9 +60,9 @@ export function CreateRoomForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create a room</CardTitle>
+        <CardTitle>Crie uma sala</CardTitle>
         <CardDescription>
-          Create a room and start getting your answers!
+          Crie uma sala e comece a receber suas respostas!
         </CardDescription>
       </CardHeader>
 
@@ -78,9 +78,9 @@ export function CreateRoomForm() {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Room name</FormLabel>
+                    <FormLabel>Nome da sala</FormLabel>
                     <FormControl>
-                      <Input placeholder="Room name..." {...field} />
+                      <Input placeholder="Nome da sala..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,7 +97,7 @@ export function CreateRoomForm() {
                     <FormLabel>Room description</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Room description... (optional)"
+                        placeholder="Descrição da sala... (opcional)"
                         {...field}
                       />
                     </FormControl>
@@ -106,7 +106,7 @@ export function CreateRoomForm() {
                 );
               }}
             />
-            <Button disabled={createRoomMutation.isPending}>Submit</Button>
+            <Button disabled={createRoomMutation.isPending}>Enviar</Button>
           </form>
         </Form>
       </CardContent>
