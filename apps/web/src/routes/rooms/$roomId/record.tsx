@@ -18,11 +18,34 @@ function RouteComponent() {
   const { roomId } = Route.useParams();
   const [isRecording, setIsRecording] = useState(false);
   const recorderRef = useRef<MediaRecorder | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout>(null);
 
   const trpc = useTRPC();
   const uploadAudioMutation = useMutation(
     trpc.rooms.uploadAudio.mutationOptions()
   );
+
+  function createRecorder(audio: MediaStream) {
+    recorderRef.current = new MediaRecorder(audio, {
+      mimeType: 'audio/webm',
+      audioBitsPerSecond: 64_000,
+    });
+
+    recorderRef.current.ondataavailable = (e) => {
+      if (e.data.size > 0) {
+        uploadAudio(e.data);
+      }
+    };
+    recorderRef.current.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recorderRef.current.onstop = () => {
+      setIsRecording(false);
+    };
+
+    recorderRef.current.start();
+  }
 
   async function uploadAudio(audio: Blob) {
     const bff = await audio.arrayBuffer();
@@ -49,27 +72,12 @@ function RouteComponent() {
         },
       });
 
-      recorderRef.current = new MediaRecorder(audio, {
-        mimeType: 'audio/webm',
-        audioBitsPerSecond: 64_000,
-      });
+      createRecorder(audio);
 
-      recorderRef.current.ondataavailable = (e) => {
-        if (e.data.size > 0) {
-          // biome-ignore lint/suspicious/noConsole: <a>
-          console.log(e.data);
-          uploadAudio(e.data);
-        }
-      };
-      recorderRef.current.onstart = () => {
-        setIsRecording(true);
-      };
-
-      recorderRef.current.onstop = () => {
-        setIsRecording(false);
-      };
-
-      recorderRef.current.start();
+      intervalRef.current = setInterval(() => {
+        recorderRef.current?.stop();
+        createRecorder(audio);
+      }, 5000);
     } catch (error) {
       // biome-ignore lint/suspicious/noConsole: <pls>
       console.error(error);
@@ -81,6 +89,10 @@ function RouteComponent() {
   function stopRecording() {
     if (recorderRef.current && recorderRef.current.state !== 'inactive') {
       recorderRef.current.stop();
+    }
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
   }
 
