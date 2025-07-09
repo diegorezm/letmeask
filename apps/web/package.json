@@ -13,10 +13,12 @@
     "check": "biome check"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@letmeask/trpc-client": "workspace:^",
     "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.0.6",
-    "@letmeask/trpc-client": "workspace:^",
     "@tanstack/react-query": "^5.66.5",
     "@tanstack/react-query-devtools": "^5.66.5",
     "@tanstack/react-router": "^1.121.2",
@@ -24,12 +26,15 @@
     "@tanstack/router-plugin": "^1.121.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.60.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.6",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.25.75"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",

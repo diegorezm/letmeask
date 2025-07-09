@@ -6,20 +6,31 @@ import { schema } from '../../../db/schemas/index.ts';
 import { publicProcedure, router } from '../../../trpc.ts';
 
 export const roomsRouter = router({
-  findAll: publicProcedure.query(async () => {
-    const rooms = await db
-      .select({
-        id: schema.rooms.id,
-        name: schema.rooms.name,
-        createdAt: schema.rooms.createdAt,
-        questionCount: count(schema.questions.id),
+  findAll: publicProcedure
+    .input(
+      z.object({
+        limit: z.coerce.number().optional().default(5),
       })
-      .from(schema.rooms)
-      .leftJoin(schema.questions, eq(schema.questions.roomId, schema.rooms.id))
-      .groupBy(schema.rooms.id, schema.rooms.name)
-      .orderBy(desc(schema.rooms.createdAt));
-    return rooms;
-  }),
+    )
+    .query(async ({ input }) => {
+      const { limit } = input;
+      const rooms = await db
+        .select({
+          id: schema.rooms.id,
+          name: schema.rooms.name,
+          createdAt: schema.rooms.createdAt,
+          questionCount: count(schema.questions.id),
+        })
+        .from(schema.rooms)
+        .leftJoin(
+          schema.questions,
+          eq(schema.questions.roomId, schema.rooms.id)
+        )
+        .groupBy(schema.rooms.id, schema.rooms.name)
+        .orderBy(desc(schema.rooms.createdAt))
+        .limit(limit);
+      return rooms;
+    }),
   findById: publicProcedure
     .input(
       z.object({

@@ -5,7 +5,8 @@
   "private": true,
   "exports": {
     "./trpc": "./src/trpc.ts",
-    "./router": "./src/router.ts"
+    "./router": "./src/router.ts",
+    "./types": "./src/types.ts"
   },
   "scripts": {
     "start": "node --env-file=.env --experimental-strip-types --no-warnings  src/server.ts",

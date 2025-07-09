@@ -1,28 +1,27 @@
 import { useTRPC } from '@letmeask/trpc-client';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { createLazyFileRoute, Link } from '@tanstack/react-router';
+import { createLazyFileRoute } from '@tanstack/react-router';
+import { CreateRoomForm } from '@/components/create-room-form';
+import { Loader } from '@/components/loader';
+import { RecentRooms } from '@/components/recent-rooms';
 
 export const Route = createLazyFileRoute('/rooms/')({
   component: RouteComponent,
+  pendingComponent: () => <Loader />,
 });
 
 function RouteComponent() {
   const trpc = useTRPC();
-  const roomsQuery = useSuspenseQuery(trpc.rooms.findAll.queryOptions());
+  const roomsQuery = useSuspenseQuery(trpc.rooms.findAll.queryOptions({}));
   const rooms = roomsQuery.data;
 
   return (
-    <div className="px-4 py-2">
+    <main className="mx-auto h-full w-full max-w-4xl space-y-8">
       <h1 className="font-semibold text-2xl">Rooms</h1>
-      <ul>
-        {rooms.map((r) => (
-          <li key={r.id}>
-            <Link params={{ roomId: r.id }} to="/rooms/$roomId">
-              {r.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className="grid grid-cols-2 gap-2">
+        <CreateRoomForm />
+        <RecentRooms rooms={rooms} />
+      </div>
+    </main>
   );
 }
